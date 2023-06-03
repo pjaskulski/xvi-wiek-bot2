@@ -29,7 +29,7 @@ if __name__ == '__main__':
     with open(log_file_path, 'r', encoding='utf-8') as f:
         log_date = f.read().strip()
         
-    today = date.today()
+    today = str(date.today())
     
     if log_date == today:
         print('Dziś już opublikowano tweeta.')
