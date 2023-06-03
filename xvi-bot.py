@@ -22,7 +22,7 @@ def get_fact():
 # ------------------------------------------------------------------------------   
 if __name__ == '__main__':
     
-    home_pah = os.path.expanduser('~')
+    home_path = os.path.expanduser('~')
     log_file_path = home_path + "/.xvi-wiek-bot/xvi-wiek-bot.log"
     err_file_path = home_path + "/.xvi-wiek-bot/bot_errrors.log"
     
