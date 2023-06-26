@@ -19,23 +19,23 @@ def get_fact():
     return fact["content"]
 
 
-# ------------------------------------------------------------------------------   
+# ------------------------------------------------------------------------------
 if __name__ == '__main__':
-    
+
     home_path = os.path.expanduser('~')
     log_file_path = home_path + "/.xvi-wiek-bot/xvi-wiek-bot.log"
     err_file_path = home_path + "/.xvi-wiek-bot/bot_errrors.log"
-    
+
     with open(log_file_path, 'r', encoding='utf-8') as f:
         log_date = f.read().strip()
-        
+
     today = str(date.today())
-    
+
     if log_date == today:
         print('Dziś już opublikowano tweeta.')
         sys.exit(1)
-            
-    try:    
+
+    try:
         client = tweepy.Client(
             consumer_key=CONSUMER_KEY,
             consumer_secret=CONSUMER_SECRET,
@@ -45,16 +45,17 @@ if __name__ == '__main__':
     except tweepy.TweepError as e:
        with open(err_file_path, 'a', encoding='utf-8') as f:
            f.write(e.message + '\n')
-    
+
     # wydarzenie z serwisu xvi-wiek
     text = get_fact()
-    
-    try:    
-        response = client.create_tweet(text=text)
+    url = f"https://xvi-wiek.pl/dzien/{date.today().month}/{date.today().day}"
+
+    try:
+        response = client.create_tweet(text=text + ' ' + url)
     except tweepy.TweepError as e:
        with open(err_file_path, 'a', encoding='utf-8') as f:
            f.write(e.message + '\n')
-    
+
     with open(log_file_path, 'w', encoding='utf-8') as f:
         f.write(today)
 
